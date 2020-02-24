@@ -18,6 +18,5 @@ namespace tarsx {
 		static auto connect(int fd, sockaddr_in& addr) -> bool;
 
 		static auto getAddress(const std::string& host, int port, sockaddr_in& addr) -> void;
-		static auto errorToString(int error) -> std::string;
 	}
 }

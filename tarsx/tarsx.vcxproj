@@ -75,17 +75,28 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <ItemGroup>
+    <ClCompile Include="Condition.cc" />
     <ClCompile Include="main.cc" />
+    <ClCompile Include="Mutex.cc" />
     <ClCompile Include="NetworkUtil.cc" />
+    <ClCompile Include="Socket.cc" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Condition.h" />
     <ClInclude Include="Epoller.h" />
+    <ClInclude Include="Lock.hpp" />
+    <ClInclude Include="Monitor.hpp" />
+    <ClInclude Include="Mutex.h" />
     <ClInclude Include="NetworkUtil.h" />
+    <ClInclude Include="Socket.h" />
   </ItemGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <CppLanguageStandard>c++17</CppLanguageStandard>
     </ClCompile>
+    <Link>
+      <LibraryDependencies>muduo_base;pthread</LibraryDependencies>
+    </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets" />

@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="main.cc" />
+    <ClCompile Include="NetworkUtil.cc">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="Mutex.cc">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="Condition.cc">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="Socket.cc">
+      <Filter>util</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="NetworkUtil.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="Epoller.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="Mutex.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="Condition.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="Monitor.hpp">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="Lock.hpp">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="Socket.h">
+      <Filter>util</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="util">
+      <UniqueIdentifier>{ece5c940-8ca3-498e-9b3d-dba5aec33a4b}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>
