@@ -14,6 +14,9 @@
     <ClCompile Include="Socket.cc">
       <Filter>util</Filter>
     </ClCompile>
+    <ClCompile Include="Epoller.cc">
+      <Filter>util</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NetworkUtil.h">
@@ -37,10 +40,21 @@
     <ClInclude Include="Socket.h">
       <Filter>util</Filter>
     </ClInclude>
+    <ClInclude Include="ThreadDeque.hpp">
+      <Filter>util</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="util">
       <UniqueIdentifier>{ece5c940-8ca3-498e-9b3d-dba5aec33a4b}</UniqueIdentifier>
     </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Message.h">
+      <Filter>util</Filter>
+    </None>
+    <None Include="NetThread.h">
+      <Filter>util</Filter>
+    </None>
   </ItemGroup>
 </Project>

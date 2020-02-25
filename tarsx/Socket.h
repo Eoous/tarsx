@@ -13,14 +13,9 @@ namespace tarsx {
 		auto createSocket(int socketType = SOCK_STREAM, int domain = AF_INET) -> void;
 
 		auto bind(const std::string& seraddr, int port) -> void;
-
 		auto listen(int backlog) -> void;
-		
-		auto connect(const std::string& seraddr, uint16_t port) -> void;
-		auto connect(sockaddr* seraddr, socklen_t addrlen) -> int;
-		auto connectNoThrow(const std::string& seraddr, uint16_t port) -> int;
-
-		auto accept(Socket& sock, sockaddr* sockaddr, socklen_t& socklen) -> int;
+		auto connect(const std::string& ser_addr, uint16_t port) -> void;
+		auto accept(Socket& sock, sockaddr* sock_addr, socklen_t& sock_len) -> int;
 
 		auto fd() const { return fd_; }
 		auto valid() const { return fd_ != -1; }
@@ -29,12 +24,13 @@ namespace tarsx {
 		auto parseAddr(const std::string& addr, in_addr& sinaddr) -> void;
 
 		auto set_block(bool block) -> void;
+		auto set_keepAlive() -> void;
+		auto set_tcpNoDelay() -> void;
 		auto set_noCloseWait() -> void;
 		auto set_closeWaitDefault() -> void;
 		auto set_owner(bool owner) -> void { owner_ = owner; }
 
-		auto recvfrom(void* buf, size_t len, std::string& fromAddr, uint16_t& fromPort, int flags = 0) -> int;
-		static auto set_block(int fd, bool block) -> void;
+		auto recvfrom(void* buf, size_t len, std::string& from_addr, uint16_t& from_port, int flags = 0) -> int;
 	private:
 		auto recvfrom(void* buf, size_t len, sockaddr* fromAddr, socklen_t& fromLen, int flags = 0) -> int;
 
