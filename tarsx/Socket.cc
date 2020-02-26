@@ -20,6 +20,7 @@ Socket::~Socket() {
 }
 
 auto Socket::init(int fd, bool owner, int domain) -> void {
+	LOG_INFO << "~Socket()";
 	if(owner_) {
 		close();
 	}

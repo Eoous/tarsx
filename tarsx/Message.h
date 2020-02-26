@@ -6,8 +6,13 @@
 
 #include "Monitor.hpp"
 namespace tarsx {
-	
 	class BindAdapter;
+	enum EM_CLOSE_T {
+		EM_CLIENT_CLOSE = 0,
+		EM_SERVER_CLOSE= 1,
+		EM_SERVER_TIMEOUT_CLOSE = 2
+	};
+	
 	struct tagRecvData {
 		uint32_t uid;
 		std::string buffer;

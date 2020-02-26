@@ -17,6 +17,21 @@
     <ClCompile Include="Epoller.cc">
       <Filter>util</Filter>
     </ClCompile>
+    <ClCompile Include="ClientSocket.cc">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="Connection.cc">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="BindAdapter.cc">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="Message.cc">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="NetThread.cc">
+      <Filter>util</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NetworkUtil.h">
@@ -41,6 +56,18 @@
       <Filter>util</Filter>
     </ClInclude>
     <ClInclude Include="ThreadDeque.hpp">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="ClientSocket.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="Connection.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="BufferPoll.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="BindAdapter.h">
       <Filter>util</Filter>
     </ClInclude>
   </ItemGroup>

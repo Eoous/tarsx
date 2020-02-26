@@ -1,11 +1,12 @@
 #include <memory>
-
-#include "ThreadDeque.hpp"
-
+#include "NetThread.h"
+#include "BindAdapter.h"
+using namespace tarsx;
 int main() {
-
-	tarsx::ThreadDeque<std::unique_ptr<int>,std::deque<std::unique_ptr<int>>> a;
-	a.test();
-	auto c = a.pop_front();
-	return 0;
+	NetThread a;
+	std::shared_ptr<BindAdapter> adapter(new BindAdapter());
+	adapter->set_endpoint("", 9000);
+	a.bind(adapter);
+	a.createEpoll(100);
+	a.run();
 }

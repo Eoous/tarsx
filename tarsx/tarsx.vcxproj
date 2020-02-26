@@ -75,15 +75,24 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <ItemGroup>
+    <ClCompile Include="BindAdapter.cc" />
+    <ClCompile Include="ClientSocket.cc" />
     <ClCompile Include="Condition.cc" />
+    <ClCompile Include="Connection.cc" />
     <ClCompile Include="Epoller.cc" />
     <ClCompile Include="main.cc" />
+    <ClCompile Include="Message.cc" />
     <ClCompile Include="Mutex.cc" />
+    <ClCompile Include="NetThread.cc" />
     <ClCompile Include="NetworkUtil.cc" />
     <ClCompile Include="Socket.cc" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="BindAdapter.h" />
+    <ClInclude Include="BufferPoll.h" />
+    <ClInclude Include="ClientSocket.h" />
     <ClInclude Include="Condition.h" />
+    <ClInclude Include="Connection.h" />
     <ClInclude Include="Epoller.h" />
     <ClInclude Include="Lock.hpp" />
     <None Include="Message.h" />
