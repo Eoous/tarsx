@@ -2,7 +2,6 @@
 #include <map>
 #include <list>
 #include <unordered_map>
-#include <thread>
 
 #include "Message.h"
 #include "Epoller.h"
@@ -36,6 +35,7 @@ namespace tarsx {
 		auto addTConnection(std::shared_ptr<Connection> connection) -> void;
 		auto delConnection(std::shared_ptr<Connection> connection, bool eraseList = true, EM_CLOSE_T closeType = EM_CLIENT_CLOSE) -> void;
 
+		auto start() -> void;
 		auto run() -> void;
 		auto terminate() -> void;
 		auto close(uint32_t uid) -> void;
@@ -61,6 +61,5 @@ namespace tarsx {
 		std::unordered_map<int, std::shared_ptr<BindAdapter>> listeners_;
 		bool terminate_ = false;
 		ThreadLock monitor_;
-		std::thread running;
 	};
 }

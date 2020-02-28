@@ -6,6 +6,7 @@
 
 #include "Monitor.hpp"
 namespace tarsx {
+	class ServantHandle;
 	class BindAdapter;
 	enum EM_CLOSE_T {
 		EM_CLIENT_CLOSE = 0,
@@ -40,7 +41,7 @@ namespace tarsx {
 	struct HandleGroup {
 		std::string name;
 		ThreadLock monitor;
-		//std::vector<std::shared_ptr<Handle>> handles;
+		std::vector<std::shared_ptr<ServantHandle>> handles;
 		std::map<std::string, std::shared_ptr<BindAdapter>> adapters;
 	};
 }

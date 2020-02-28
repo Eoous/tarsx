@@ -1,10 +1,9 @@
 #include <sys/epoll.h>
 #include <unistd.h>
-
-#include "NetThread.h"
-
+#include <thread>
 #include <arpa/inet.h>
 
+#include "NetThread.h"
 #include "ClientSocket.h"
 #include "Connection.h"
 #include "BindAdapter.h"
@@ -203,6 +202,11 @@ auto NetThread::delConnection(std::shared_ptr<Connection> connection, bool erase
 		connection->close();
 		connectionUids_.erase(uid);
 	}
+}
+
+auto NetThread::start() -> void {
+	std::thread epoll_loop(&NetThread::run,this);
+	epoll_loop.detach();
 }
 
 auto NetThread::run() -> void {

@@ -79,12 +79,15 @@
     <ClCompile Include="ClientSocket.cc" />
     <ClCompile Include="Condition.cc" />
     <ClCompile Include="Connection.cc" />
+    <None Include="CoroutineScheduler.cc" />
     <ClCompile Include="Epoller.cc" />
+    <ClCompile Include="EpollServer.cc" />
+    <ClCompile Include="EpollServer.h" />
     <ClCompile Include="main.cc" />
-    <ClCompile Include="Message.cc" />
     <ClCompile Include="Mutex.cc" />
     <ClCompile Include="NetThread.cc" />
     <ClCompile Include="NetworkUtil.cc" />
+    <ClCompile Include="ServantHandle.cc" />
     <ClCompile Include="Socket.cc" />
   </ItemGroup>
   <ItemGroup>
@@ -93,6 +96,7 @@
     <ClInclude Include="ClientSocket.h" />
     <ClInclude Include="Condition.h" />
     <ClInclude Include="Connection.h" />
+    <None Include="CoroutineScheduler.h" />
     <ClInclude Include="Epoller.h" />
     <ClInclude Include="Lock.hpp" />
     <None Include="Message.h" />
@@ -100,8 +104,17 @@
     <ClInclude Include="Mutex.h" />
     <None Include="NetThread.h" />
     <ClInclude Include="NetworkUtil.h" />
+    <ClInclude Include="ServantHandle.h" />
+    <ClInclude Include="tc_fcontext.h" />
+    <ClInclude Include="tc_fcontext_x86_64.h" />
     <ClInclude Include="ThreadDeque.hpp" />
     <ClInclude Include="Socket.h" />
+    <Library Include="tc_jump_x86_64_sysv_elf_gas.s">
+      <FileType>Document</FileType>
+    </Library>
+    <Library Include="tc_make_x86_64_sysv_elf_gas.s">
+      <FileType>Document</FileType>
+    </Library>
   </ItemGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>

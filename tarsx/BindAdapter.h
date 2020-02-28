@@ -5,6 +5,7 @@
 #include "ThreadDeque.hpp"
 
 namespace tarsx {
+	class EpollServer;
 	class BindAdapter {
 	public:
 		BindAdapter() = default;
@@ -30,14 +31,12 @@ namespace tarsx {
 		auto insertRecvDeque(std::deque<utagRecvData>& deque, bool pushback = true) -> void;
 		auto waitForRecvQueue(uint32_t wait_time) -> utagRecvData;
 
-		//template <typename T>
-		//auto set_handle() -> void {
-		//	std::shared_ptr<BindAdapter> thisptr(this);
-		//	epollServer_->set_handleGroup<T>(handleGroupName_, handleNum_, thisptr);
-		//}
-
+		auto set_handle() -> void;
+		auto set_handleGroup(std::shared_ptr<HandleGroup>& handle_group) {
+			handleGroup_ = handle_group;
+		}
 	private:
-		//EpollServer* epollServer_;
+		EpollServer* epollServer_;
 		Socket socket_;
 		EndPoint endpoint_;
 		std::string name_;

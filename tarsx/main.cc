@@ -8,5 +8,5 @@ int main() {
 	adapter->set_endpoint("", 9000);
 	a.bind(adapter);
 	a.createEpoll(100);
-	a.run();
+	a.start();
 }

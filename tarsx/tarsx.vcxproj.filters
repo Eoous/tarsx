@@ -26,10 +26,16 @@
     <ClCompile Include="BindAdapter.cc">
       <Filter>util</Filter>
     </ClCompile>
-    <ClCompile Include="Message.cc">
+    <ClCompile Include="NetThread.cc">
       <Filter>util</Filter>
     </ClCompile>
-    <ClCompile Include="NetThread.cc">
+    <ClCompile Include="ServantHandle.cc">
+      <Filter>servant</Filter>
+    </ClCompile>
+    <ClCompile Include="EpollServer.h">
+      <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="EpollServer.cc">
       <Filter>util</Filter>
     </ClCompile>
   </ItemGroup>
@@ -70,10 +76,22 @@
     <ClInclude Include="BindAdapter.h">
       <Filter>util</Filter>
     </ClInclude>
+    <ClInclude Include="ServantHandle.h">
+      <Filter>servant</Filter>
+    </ClInclude>
+    <ClInclude Include="tc_fcontext.h">
+      <Filter>servant</Filter>
+    </ClInclude>
+    <ClInclude Include="tc_fcontext_x86_64.h">
+      <Filter>servant</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="util">
       <UniqueIdentifier>{ece5c940-8ca3-498e-9b3d-dba5aec33a4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="servant">
+      <UniqueIdentifier>{deefa162-685c-48c1-9ebf-48e6d9942321}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -83,5 +101,19 @@
     <None Include="NetThread.h">
       <Filter>util</Filter>
     </None>
+    <None Include="CoroutineScheduler.h">
+      <Filter>servant</Filter>
+    </None>
+    <None Include="CoroutineScheduler.cc">
+      <Filter>servant</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="tc_make_x86_64_sysv_elf_gas.s">
+      <Filter>servant</Filter>
+    </Library>
+    <Library Include="tc_jump_x86_64_sysv_elf_gas.s">
+      <Filter>servant</Filter>
+    </Library>
   </ItemGroup>
 </Project>
