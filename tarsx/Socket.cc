@@ -16,12 +16,12 @@ using namespace tarsx;
 Socket::~Socket() {
 	if(owner_) {
 		close();
-		LOG_INFO << "~Socket()";
+		LOG_TRACE << "~Socket()";
 	}
 }
 
 auto Socket::init(int fd, bool owner, int domain) -> void {
-	LOG_INFO << "Socket()::init()";
+	LOG_TRACE << "Socket()::init()";
 	if(owner_) {
 		close();
 	}

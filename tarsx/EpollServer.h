@@ -15,22 +15,18 @@ namespace tarsx {
 
 		auto get_netThreadNum() { return netThreadNum_; }
 		auto& get_netThreads() { return netThreads_; }
+		auto& getNetThreadByfd(int fd) { return netThreads_[fd % netThreads_.size()]; }
 		
 		auto send(uint32_t uid, const std::string& msg, const std::string& ip, uint16_t port, int fd) -> void;
 		auto bind(std::shared_ptr<BindAdapter> bindadapter) -> int;
 		auto addConnection(std::shared_ptr<Connection> connection, int fd, int type) -> void;
 
-		auto close(unsigned int uid, int fd) -> void;
-		auto& getNetThreadByfd(int fd) {
-			return netThreads_[fd % netThreads_.size()];
-		}
-
-		auto startHandle() -> void;
 		auto createEpoll() -> void;
+		auto startHandle() -> void;
 		auto isTerminate() const -> bool { return terminate_; }
 		auto terminate() -> void;
-		auto stopThread() -> void;
-
+		auto close(unsigned int uid, int fd) -> void;
+		
 		auto set_handleGroup(const std::string& groupName, int32_t handleNum, std::shared_ptr<BindAdapter>& adapter) -> void;
 	private:
 		std::vector<std::unique_ptr<NetThread>> netThreads_;
@@ -38,5 +34,6 @@ namespace tarsx {
 		uint32_t netThreadNum_;
 		bool handleStarted_;
 		std::map<std::string, std::shared_ptr<HandleGroup>> handleGroups_;
+		ThreadLock monitor_;
 	};
 }

@@ -11,12 +11,11 @@
 struct epoll_event;
 namespace tarsx {
 	class Connection;
-	//class EpollServer;
+	class EpollServer;
 	class EndPoint;
 	class NetThread {
 	public:
-		NetThread();
-		//NetThread(EpollServer* epoll_server);
+		NetThread(EpollServer* epoll_server);
 		~NetThread() = default;
 
 		auto createEpoll(uint32_t number = 0) -> void;
@@ -47,7 +46,7 @@ namespace tarsx {
 			ET_NET = 0
 		};
 	private:
-		//EpollServer* epollServer_;
+		EpollServer* epollServer_;
 		Epoller epoller_;
 		Socket shutdownSock_;
 		Socket notifySocket_;

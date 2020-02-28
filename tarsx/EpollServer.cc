@@ -8,6 +8,17 @@
 
 using namespace tarsx;
 
+EpollServer::EpollServer(uint32_t net_thread_num)
+	:netThreadNum_(net_thread_num),netThreads_(net_thread_num){
+	for(auto& net_thread:netThreads_) {
+		net_thread.reset(std::make_unique<NetThread>(this));
+	}
+}
+
+EpollServer::~EpollServer() {
+	terminate();
+}
+
 auto EpollServer::send(uint32_t uid, const std::string& msg, const std::string& ip, uint16_t port, int fd) -> void {
 	auto& net_thread = getNetThreadByfd(fd);
 	net_thread->recvNeedToSendFromServer(uid, msg, ip, port);
@@ -22,6 +33,36 @@ auto EpollServer::addConnection(std::shared_ptr<Connection> connection, int fd, 
 	auto& net_thread = getNetThreadByfd(fd);
 	/* type留下来为udp做扩展 */
 	net_thread->addTConnection(connection);
+}
+
+auto EpollServer::createEpoll() -> void {
+	for(auto& net_thread: netThreads_) {
+		net_thread->createEpoll(256);
+	}
+}
+
+auto EpollServer::startHandle() -> void {
+	if(!handleStarted_) {
+		handleStarted_ = true;
+		for(auto&[name,group]:handleGroups_) {
+			for (auto& servanthandle : group->handles) {
+				servanthandle->run();
+			}
+		}
+	}
+}
+
+auto EpollServer::terminate() -> void {
+	if(!terminate_) {
+		Lock sync(monitor_);
+		terminate_ = true;
+		monitor_.notifyAll();
+	}
+}
+
+auto EpollServer::close(unsigned uid, int fd) -> void {
+	auto& net_thread = getNetThreadByfd(fd);
+	net_thread->close(uid);
 }
 
 

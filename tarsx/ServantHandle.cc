@@ -1,5 +1,6 @@
 #include <cassert>
 #include <vector>
+#include <thread>
 #include <sys/time.h>
 #include <muduo/base/Logging.h>
 
@@ -9,6 +10,9 @@
 #include "EpollServer.h"
 
 using namespace tarsx;
+
+size_t coroutineMemSize = 1073741824;
+uint32_t coroutineStackSize = 1310272;
 
 auto ServantHandle::init() -> void {
 	auto handle_group = handleGroup_.lock();
@@ -21,8 +25,14 @@ auto ServantHandle::init() -> void {
 	}
 	
 }
-size_t coroutineMemSize = 1073741824;
-uint32_t coroutineStackSize = 1310272;
+
+auto ServantHandle::start() -> void {
+	std::thread running([this]() {
+		run();
+		});
+	running.detach();
+}
+
 auto ServantHandle::run() -> void {
 	init();
 
@@ -37,7 +47,7 @@ auto ServantHandle::run() -> void {
 	corouScheduler_->set_handle(this);
 	auto ret = corouScheduler_->createCoroutine(std::bind(&ServantHandle::handleRequest, this));
 
-	while(1) {
+	while(!epollServer_->isTerminate()) {
 		corouScheduler_->tars_run();
 	}
 	corouScheduler_->terminate();

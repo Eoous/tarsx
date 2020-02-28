@@ -11,14 +11,16 @@
 using namespace tarsx;
 
 #define H64(x) ((static_cast<uint64_t>(x))<<32)
-NetThread::NetThread() {
+
+NetThread::NetThread(EpollServer* epoll_server)
+	:epollServer_(epoll_server){
 	shutdownSock_.createSocket();
 	notifySocket_.createSocket();
 }
 
 auto NetThread::createEpoll(uint32_t number) -> void {
 	auto total = 2000;
-	epoller_.create(256);
+	epoller_.create(number);
 
 	epoller_.add(shutdownSock_.fd(), H64(ET_CLOSE), EPOLLIN);
 	epoller_.add(notifySocket_.fd(), H64(ET_NOTIFY), EPOLLIN);
@@ -32,7 +34,7 @@ auto NetThread::createEpoll(uint32_t number) -> void {
 		free_.push_back(i);
 		++freeSize_;
 	}
-	LOG_INFO << "NetThread::createEpoll() successful";
+	LOG_TRACE << "NetThread::createEpoll() successful";
 }
 
 auto NetThread::bind(const EndPoint& end_point, Socket& socket) -> void {
@@ -183,7 +185,7 @@ auto NetThread::addTConnection(std::shared_ptr<Connection> connection) -> void {
 }
 
 auto NetThread::delConnection(std::shared_ptr<Connection> connection, bool eraseList, EM_CLOSE_T closeType) -> void {
-	LOG_INFO << "delConnection():" << connection->fd();
+	LOG_TRACE << "delConnection():" << connection->fd();
 	if (connection->get_listenfd() != -1) {
 		uint32_t uid = connection->get_uid();
 

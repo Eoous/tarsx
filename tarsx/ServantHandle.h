@@ -16,6 +16,7 @@ namespace tarsx {
 		ServantHandle() = default;
 		~ServantHandle() = default;
 
+		auto start() -> void;
 		auto run() -> void;
 		auto handle(utagRecvData& recv_data) -> void;
 
