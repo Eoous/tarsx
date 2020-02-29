@@ -12,7 +12,7 @@ namespace tarsx {
 		//BindAdapter(EpollServer* epoll_server);
 		~BindAdapter();
 
-		auto set_name(std::string& name) { Lock lock(monitor_); name_ = name; }
+		auto set_name(const std::string& name) { Lock lock(monitor_); name_ = name; }
 		auto get_name() const { return name_; }
 		auto set_endpoint(const std::string& host, int port) {
 			Lock lock(monitor_);
@@ -31,7 +31,6 @@ namespace tarsx {
 		auto insertRecvDeque(std::deque<utagRecvData>& deque, bool pushback = true) -> void;
 		auto waitForRecvQueue(uint32_t wait_time) -> utagRecvData;
 
-		auto set_handle() -> void;
 		auto set_handleGroup(std::shared_ptr<HandleGroup>& handle_group) {
 			handleGroup_ = handle_group;
 		}

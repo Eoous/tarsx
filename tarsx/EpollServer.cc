@@ -1,5 +1,3 @@
-
-
 #include "EpollServer.h"
 #include "NetThread.h"
 #include "BindAdapter.h"
@@ -9,9 +7,10 @@
 using namespace tarsx;
 
 EpollServer::EpollServer(uint32_t net_thread_num)
-	:netThreadNum_(net_thread_num),netThreads_(net_thread_num){
+	:netThreadNum_(net_thread_num){
+	netThreads_.resize(net_thread_num);
 	for(auto& net_thread:netThreads_) {
-		net_thread.reset(std::make_unique<NetThread>(this));
+		net_thread.reset(new NetThread(this));
 	}
 }
 
@@ -65,12 +64,11 @@ auto EpollServer::close(unsigned uid, int fd) -> void {
 	net_thread->close(uid);
 }
 
-
-auto EpollServer::set_handleGroup(const std::string& groupName, int32_t handleNum, std::shared_ptr<BindAdapter>& adapter) -> void {
-	auto res = handleGroups_.find(groupName);
+auto EpollServer::set_handleGroup(const std::string& group_name, int32_t handleNum, std::shared_ptr<BindAdapter>& adapter) -> void {
+	auto res = handleGroups_.find(group_name);
 	if(res == handleGroups_.end()) {
 		std::shared_ptr<HandleGroup> handle_group = std::make_shared<HandleGroup>();
-		handle_group->name = groupName;
+		handle_group->name = group_name;
 		adapter->set_handleGroup(handle_group);
 
 		for (int i = 0; i < handleNum; ++i) {
@@ -79,8 +77,8 @@ auto EpollServer::set_handleGroup(const std::string& groupName, int32_t handleNu
 			handle->set_handleGroup(handle_group);
 			handle_group->handles.push_back(handle);
 		}
-		handleGroups_[groupName] = handle_group;
-		res = handleGroups_.find(groupName);
+		handleGroups_[group_name] = handle_group;
+		res = handleGroups_.find(group_name);
 	}
 	res->second->adapters[adapter->get_name()] = adapter;
 	adapter->set_handleGroup(res->second);

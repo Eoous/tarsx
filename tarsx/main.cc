@@ -1,12 +1,25 @@
 #include <memory>
-#include "NetThread.h"
 #include "BindAdapter.h"
+#include "NetThread.h"
+#include "EpollServer.h"
 using namespace tarsx;
 int main() {
-	NetThread a;
+	HandleGroup handle_group;
 	std::shared_ptr<BindAdapter> adapter(new BindAdapter());
+	adapter->set_name("test");
 	adapter->set_endpoint("", 9000);
+	adapter->set_handleGroupName("test");
+	
+	EpollServer a(2);
+	a.set_handleGroup("test", 2, adapter);
 	a.bind(adapter);
-	a.createEpoll(100);
-	a.start();
+	a.createEpoll();
+
+	for(auto& it : a.get_netThreads()) {
+		it->start();
+	}
+	a.startHandle();
+	a.waitForWait();
+
+	return 0;
 }

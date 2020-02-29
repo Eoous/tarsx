@@ -24,8 +24,3 @@ auto BindAdapter::insertRecvDeque(std::deque<utagRecvData>& deque, bool pushback
 auto BindAdapter::waitForRecvQueue(uint32_t wait_time) -> utagRecvData {
 	return receiveBuffer_.pop_front(wait_time);
 }
-
-auto BindAdapter::set_handle() -> void {
-	std::shared_ptr<BindAdapter> thisptr(this);
-	epollServer_->set_handleGroup(handleGroupName_, handleNum_, thisptr);
-}

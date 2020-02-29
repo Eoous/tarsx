@@ -111,8 +111,6 @@ auto NetThread::processNet(const epoll_event& ev) -> void {
 		if (!recv_deque.empty()) {
 			connection->get_bindAdapter()->insertRecvDeque(recv_deque, true);
 		}
-		char a[] = "xxxx";
-		::send(connection->fd(), a, sizeof(a),0);
 	}
 
 	if (ev.events & EPOLLOUT) {
@@ -140,7 +138,7 @@ auto NetThread::processPipe() -> void {
 		}
 		case 'c': {
 			auto connection = connectionUids_[send_msg->uid];
-			if (connection.get()) {
+			if (connection) {
 				if (connection->set_close()) {
 					delConnection(connection, true, EM_SERVER_CLOSE);
 				}
@@ -170,7 +168,13 @@ auto NetThread::conSend(std::shared_ptr<Connection>& connection) -> int {
 
 auto NetThread::recvNeedToSendFromServer(uint32_t uid, const std::string& msg,
 									     const std::string& ip,uint16_t port) -> void {
-	
+	if(terminate_) {
+		return;
+	}
+	std::unique_ptr<tagSendData> send(new tagSendData{ 's',uid,msg,ip,port });
+	sendBuffer_.push_back(send);
+
+	epoller_.mod(notifySocket_.fd(), H64(ET_NOTIFY), EPOLLOUT);
 }
 
 auto NetThread::addTConnection(std::shared_ptr<Connection> connection) -> void {

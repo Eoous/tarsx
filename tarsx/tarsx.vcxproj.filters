@@ -32,11 +32,11 @@
     <ClCompile Include="ServantHandle.cc">
       <Filter>servant</Filter>
     </ClCompile>
-    <ClCompile Include="EpollServer.h">
-      <Filter>util</Filter>
-    </ClCompile>
     <ClCompile Include="EpollServer.cc">
       <Filter>util</Filter>
+    </ClCompile>
+    <ClCompile Include="CoroutineScheduler.cc">
+      <Filter>servant</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -85,6 +85,18 @@
     <ClInclude Include="tc_fcontext_x86_64.h">
       <Filter>servant</Filter>
     </ClInclude>
+    <ClInclude Include="CoroutineScheduler.h">
+      <Filter>servant</Filter>
+    </ClInclude>
+    <ClInclude Include="NetThread.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="Message.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="EpollServer.h">
+      <Filter>util</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="util">
@@ -93,20 +105,6 @@
     <Filter Include="servant">
       <UniqueIdentifier>{deefa162-685c-48c1-9ebf-48e6d9942321}</UniqueIdentifier>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Message.h">
-      <Filter>util</Filter>
-    </None>
-    <None Include="NetThread.h">
-      <Filter>util</Filter>
-    </None>
-    <None Include="CoroutineScheduler.h">
-      <Filter>servant</Filter>
-    </None>
-    <None Include="CoroutineScheduler.cc">
-      <Filter>servant</Filter>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <Library Include="tc_make_x86_64_sysv_elf_gas.s">

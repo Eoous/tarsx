@@ -3,6 +3,7 @@
 #include <memory>
 #include <vector>
 
+#include "Lock.hpp"
 #include "Message.h"
 namespace tarsx {
 	class NetThread;
@@ -26,13 +27,20 @@ namespace tarsx {
 		auto isTerminate() const -> bool { return terminate_; }
 		auto terminate() -> void;
 		auto close(unsigned int uid, int fd) -> void;
-		
-		auto set_handleGroup(const std::string& groupName, int32_t handleNum, std::shared_ptr<BindAdapter>& adapter) -> void;
+
+		inline int waitForWait() {
+			while(!terminate_) {
+				Lock lock(monitor_);
+				monitor_.timedWait(3000);
+			}
+			return 0;
+		}
+		auto set_handleGroup(const std::string& group_name, int32_t handleNum, std::shared_ptr<BindAdapter>& adapter) -> void;
 	private:
 		std::vector<std::unique_ptr<NetThread>> netThreads_;
 		bool terminate_ = false;
 		uint32_t netThreadNum_;
-		bool handleStarted_;
+		bool handleStarted_ = false;
 		std::map<std::string, std::shared_ptr<HandleGroup>> handleGroups_;
 		ThreadLock monitor_;
 	};

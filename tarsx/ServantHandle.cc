@@ -95,8 +95,10 @@ auto ServantHandle::handleRequest() -> void {
 						recv.reset();
 					}
 					else {
-						auto ret = corouScheduler_->createCoroutine([&recv, this]() {
+						tagRecvData* temp=recv.release();
+						auto ret = corouScheduler_->createCoroutine([temp, this]() {
 							LOG_TRACE << "enter ServantHandle::handleRecvData";
+							utagRecvData recv(temp);
 							handle(recv);
 							});
 
@@ -106,6 +108,9 @@ auto ServantHandle::handleRequest() -> void {
 				else {
 					flag = false;
 					yield = false;
+				}
+				if(recv) {
+					LOG_INFO << "recv delete";
 				}
 			}
 			if (loop == 0) {
@@ -120,7 +125,12 @@ auto ServantHandle::handleRequest() -> void {
 
 auto ServantHandle::handle(utagRecvData& recv_data) -> void {
 	/* first->name second->dispatchFunc */
-	auto&& func = servants_.find("");
+	servants_["test"] = [](const std::string& request, std::vector<char>& buffer) {
+		std::string a = " response ";
+		buffer.assign(a.begin(),a.end());
+		return -1;
+	};
+	auto func = servants_.find("test");
 	assert(func != servants_.end());
 	std::vector<char> buffer;
 
@@ -144,6 +154,11 @@ auto ServantHandle::heartbeat() -> void {
 			//TarsNodeFHelper::getInstance()->keepAlive(adapter->name());
 		}
 	}
+}
+
+auto ServantHandle::sendToEpollServer(uint32_t uid, const std::string& msg, 
+									  const std::string& ip, int port,int fd) -> void {
+	epollServer_->send(uid, msg, ip, port, fd);
 }
 
 auto ServantHandle::set_epollServer(EpollServer* epoll_server) -> void {

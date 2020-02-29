@@ -13,6 +13,7 @@ Connection::Connection(std::shared_ptr<BindAdapter> bind_adapter, int listenfd, 
 }
 
 auto Connection::recv(std::deque<utagRecvData>& queue) -> int {
+	LOG_TRACE << socket_.fd() << "--recv";
 	queue.clear();
 
 	while(true) {

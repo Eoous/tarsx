@@ -3,4 +3,6 @@
 
  0.1 更新util(NetworkUtil,Mutex,Condition,ThreadLock,Lock)
 
-0.2 更新util(Socket,Epoller,EndPoint,Connection,BindAdapter,NetThread)
+0.2 更新util(Socket,Epoller,EndPoint,Connection,BindAdapter,NetThread,EpollServer)
+
+以上可以做简单的服务器
