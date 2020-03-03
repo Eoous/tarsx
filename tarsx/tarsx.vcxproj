@@ -82,6 +82,7 @@
     <ClCompile Include="CoroutineScheduler.cc" />
     <ClCompile Include="Epoller.cc" />
     <ClCompile Include="EpollServer.cc" />
+    <ClInclude Include="CommunicatorEpoll.h" />
     <ClInclude Include="EpollServer.h" />
     <ClCompile Include="main.cc" />
     <ClCompile Include="Mutex.cc" />
@@ -99,12 +100,15 @@
     <ClInclude Include="CoroutineScheduler.h" />
     <ClInclude Include="Epoller.h" />
     <ClInclude Include="Lock.hpp" />
+    <ClInclude Include="LoopQueue.hpp" />
     <ClInclude Include="Message.h" />
     <ClInclude Include="Monitor.hpp" />
     <ClInclude Include="Mutex.h" />
     <ClInclude Include="NetThread.h" />
     <ClInclude Include="NetworkUtil.h" />
     <ClInclude Include="ServantHandle.h" />
+    <ClInclude Include="ServantHelper.h" />
+    <ClInclude Include="Singleton.h" />
     <ClInclude Include="tc_fcontext.h" />
     <ClInclude Include="tc_fcontext_x86_64.h" />
     <ClInclude Include="ThreadDeque.hpp" />

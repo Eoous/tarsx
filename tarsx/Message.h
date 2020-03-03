@@ -6,6 +6,8 @@
 #include <vector>
 
 #include "Monitor.hpp"
+#include "LoopQueue.hpp"
+
 namespace tarsx {
 	class ServantHandle;
 	class BindAdapter;
@@ -45,4 +47,69 @@ namespace tarsx {
 		std::vector<std::shared_ptr<ServantHandle>> handles;
 		std::map<std::string, std::shared_ptr<BindAdapter>> adapters;
 	};
+
+	struct FDInfo {
+		enum {
+			ET_C_NOTIFY = 1,
+			ET_C_NET
+		};
+
+		size_t seq = 0;
+		int fd = -1;
+		int type = ET_C_NOTIFY;
+		void* p = nullptr;
+	};
+
+	struct ReqMonitor :public ThreadLock {
+
+	};
+
+	class ObjectProxy;
+	struct ReqMessage {
+		enum CallType {
+			SYNC_CALL = 1,
+			ASYNC_CALL,
+			ONE_WAY,
+			THREAD_EXIT
+		};
+
+		enum ReqStatus {
+			REQ_REQ = 0,
+			REQ_RSP,
+			REQ_TIME,
+			REQ_BUSY,
+			REQ_EXC
+		};
+
+		auto init(CallType calltype) -> void {
+			status = REQ_REQ;
+			type = calltype;
+
+			//callback = nullptr;
+			reqData.clear();
+			monitor.release();
+			monitorFin = false;
+			push = false;
+
+			beginTime = 0;
+			requestId = 1;
+		}
+
+		ReqStatus status = REQ_REQ;
+		CallType type = SYNC_CALL;
+		//std::shared_ptr<ServantProxyCallback> callback;
+		std::shared_ptr<ObjectProxy> objectProxy;
+		std::string request;
+		std::string response;
+		std::string reqData;
+		std::unique_ptr<ReqMonitor> monitor;
+		bool monitorFin = false;
+		bool push = false;
+
+		int64_t beginTime = 0;
+		int requestId = 1;
+	};
+
+	using ReqInfoQueue = LoopQueue<ReqMessage*>;
+	
 }

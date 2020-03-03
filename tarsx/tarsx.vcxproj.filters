@@ -97,6 +97,18 @@
     <ClInclude Include="EpollServer.h">
       <Filter>util</Filter>
     </ClInclude>
+    <ClInclude Include="Singleton.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="CommunicatorEpoll.h">
+      <Filter>servant</Filter>
+    </ClInclude>
+    <ClInclude Include="LoopQueue.hpp">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="ServantHelper.h">
+      <Filter>servant</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="util">
