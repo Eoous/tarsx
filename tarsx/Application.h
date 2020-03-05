@@ -48,8 +48,8 @@ namespace tarsx {
 		auto initializeServer() -> void;
 		auto bindAdapter(std::vector<std::shared_ptr<BindAdapter>>& adapters) -> void;
 
-		virtual auto initialize() -> void;
-		virtual auto set_handle(std::shared_ptr<BindAdapter>& adapter) -> void;
+		auto initialize() -> void;
+		auto set_handle(std::shared_ptr<BindAdapter>& adapter) -> void;
 
 		auto addServant(const std::string& name, dispatcFunc func) {
 			ServantHelperManager::instance().addServant(name, func, true);

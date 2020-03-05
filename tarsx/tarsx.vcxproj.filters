@@ -67,6 +67,9 @@
     <ClCompile Include="Application.cc">
       <Filter>servant</Filter>
     </ClCompile>
+    <ClCompile Include="HelloServer.cc">
+      <Filter>example</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NetworkUtil.h">
@@ -177,6 +180,15 @@
     <ClInclude Include="AdminF.h">
       <Filter>servant</Filter>
     </ClInclude>
+    <ClInclude Include="HelloImp.hpp">
+      <Filter>example</Filter>
+    </ClInclude>
+    <ClInclude Include="ServerImp.hpp">
+      <Filter>servant</Filter>
+    </ClInclude>
+    <ClInclude Include="NodeImp.hpp">
+      <Filter>servant</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="util">
@@ -184,6 +196,9 @@
     </Filter>
     <Filter Include="servant">
       <UniqueIdentifier>{deefa162-685c-48c1-9ebf-48e6d9942321}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="example">
+      <UniqueIdentifier>{562f2d52-7962-4f06-9783-6ea09004273e}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -195,7 +210,14 @@
     </Library>
   </ItemGroup>
   <ItemGroup>
-    <None Include="client_test.cc" />
-    <None Include="client_async_test.cc" />
+    <None Include="client_test.cc">
+      <Filter>example</Filter>
+    </None>
+    <None Include="client_async_test.cc">
+      <Filter>example</Filter>
+    </None>
+    <None Include="NodeServer.cc">
+      <Filter>servant</Filter>
+    </None>
   </ItemGroup>
 </Project>

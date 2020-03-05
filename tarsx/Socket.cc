@@ -51,7 +51,7 @@ auto Socket::bind(const std::string& seraddr, int port) -> void {
 		parseAddr(seraddr, bindAddr.sin_addr);
 	}
 	auto reuseAddr = 1;
-	::setsockopt(fd_, SOL_SOCKET, SO_REUSEADDR, reinterpret_cast<char*>(&reuseAddr), sizeof(int));
+	::setsockopt(fd_, SOL_SOCKET, SO_REUSEADDR, (&reuseAddr), sizeof(int));
 	NetworkUtil::bind(fd_, bindAddr);
 }
 

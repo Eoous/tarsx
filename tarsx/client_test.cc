@@ -8,7 +8,7 @@ auto func2 = [](auto&& aa,auto&& b) {
 	std::string a = "func2 response";
 	b.assign(a.begin(), a.end());
 };
-auto func = [](const std::string& request, std::vector<char>& buffer) -> int {
+auto HelloImp = [](const std::string& request, std::vector<char>& buffer) -> int {
 
 	func2(request, buffer);
 };
