@@ -4,6 +4,10 @@
 
 using namespace tarsx;
 
+BindAdapter::BindAdapter(EpollServer* epoll_server) {
+	epollServer_ = epoll_server;
+}
+
 BindAdapter::~BindAdapter() {
 	//epollServer_->terminate();
 }

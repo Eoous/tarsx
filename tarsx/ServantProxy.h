@@ -45,4 +45,12 @@ namespace tarsx {
 		size_t objectProxyNum_;
 		int queueSize_ = 1000;
 	};
+
+	inline auto parseRequest(const std::string& request) {
+		auto pos = request.find(":");
+		auto requestBody = request.substr(pos + 1);
+		auto posMethod = requestBody.find(":");
+		auto method = requestBody.substr(0, posMethod);
+		return std::tuple{ pos,requestBody,posMethod,method };
+	}
 }

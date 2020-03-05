@@ -1,3 +1,5 @@
+#include <muduo/base/Logging.h>
+
 #include "Communicator.h"
 #include "ServantProxy.h"
 

@@ -36,12 +36,14 @@ namespace tarsx {
 			return 0;
 		}
 		auto set_handleGroup(const std::string& group_name, int32_t handleNum, std::shared_ptr<BindAdapter>& adapter) -> void;
+
+		ThreadLock monitor_;
 	private:
 		std::vector<std::unique_ptr<NetThread>> netThreads_;
 		bool terminate_ = false;
 		uint32_t netThreadNum_;
 		bool handleStarted_ = false;
 		std::map<std::string, std::shared_ptr<HandleGroup>> handleGroups_;
-		ThreadLock monitor_;
+		
 	};
 }

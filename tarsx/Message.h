@@ -102,7 +102,6 @@ namespace tarsx {
 		ReqStatus status = REQ_REQ;
 		CallType type = SYNC_CALL;
 		asyncCallback callback;
-		//std::shared_ptr<ServantProxyCallback> callback;
 		std::shared_ptr<ObjectProxy> objectProxy;
 		std::string request;
 		std::string response;
@@ -123,5 +122,4 @@ namespace tarsx {
 		int eventfd = -1;
 		bool valid = false;
 	};
-
 }

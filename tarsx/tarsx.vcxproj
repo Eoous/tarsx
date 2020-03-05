@@ -75,11 +75,12 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <ItemGroup>
+    <ClCompile Include="Application.cc" />
     <ClCompile Include="AsyncProcThread.cc" />
     <ClCompile Include="BindAdapter.cc" />
     <ClCompile Include="Buffer.cc" />
     <ClCompile Include="ClientSocket.cc" />
-    <ClCompile Include="client_async_test.cc" />
+    <None Include="client_async_test.cc" />
     <ClCompile Include="Communicator.cc" />
     <ClCompile Include="CommunicatorEpoll.cc" />
     <ClCompile Include="Condition.cc" />
@@ -88,7 +89,10 @@
     <ClCompile Include="Epoller.cc" />
     <ClCompile Include="EpollServer.cc" />
     <ClCompile Include="ServantProxy.cc" />
+    <ClCompile Include="TarsNodeF.cc" />
     <ClCompile Include="Transceiver.cc" />
+    <ClInclude Include="AdminF.h" />
+    <ClInclude Include="Application.h" />
     <ClInclude Include="AsyncProcThread.h" />
     <ClInclude Include="Buffer.h" />
     <ClInclude Include="Communicator.h" />
@@ -102,7 +106,9 @@
     <ClCompile Include="ObjectProxyFactory.cc" />
     <ClCompile Include="ServantHandle.cc" />
     <ClCompile Include="Socket.cc" />
+    <ClInclude Include="NodeF.h" />
     <ClInclude Include="ServantProxy.h" />
+    <ClInclude Include="TarsNodeF.h" />
     <ClInclude Include="TimeoutQueueNew.hpp" />
     <ClInclude Include="Transceiver.h" />
   </ItemGroup>

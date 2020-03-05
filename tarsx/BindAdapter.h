@@ -8,8 +8,7 @@ namespace tarsx {
 	class EpollServer;
 	class BindAdapter {
 	public:
-		BindAdapter() = default;
-		//BindAdapter(EpollServer* epoll_server);
+		BindAdapter(EpollServer* epoll_server);
 		~BindAdapter();
 
 		auto set_name(const std::string& name) { Lock lock(monitor_); name_ = name; }
@@ -34,6 +33,8 @@ namespace tarsx {
 		auto set_handleGroup(std::shared_ptr<HandleGroup>& handle_group) {
 			handleGroup_ = handle_group;
 		}
+		auto set_handleNum(int num) { handleNum_ = num; }
+		auto get_handleNum() { return handleNum_; }
 	private:
 		EpollServer* epollServer_;
 		Socket socket_;

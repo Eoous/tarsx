@@ -9,6 +9,7 @@
 #include "BindAdapter.h"
 #include "EpollServer.h"
 #include "ServantManager.h"
+#include "TarsNodeF.h"
 
 using namespace tarsx;
 
@@ -147,7 +148,7 @@ auto ServantHandle::heartbeat() -> void {
 	for (auto& [name, adapter] : adapters) {
 		if (abs(cur - adapter->get_heartBeatTime()) > HEART_BEAT_INTERVAL) {
 			adapter->set_heartBeatTime(cur);
-			//TarsNodeFHelper::getInstance()->keepAlive(adapter->name());
+			TarsNodeFHelper::instance().keepAlive(adapter->get_name());
 		}
 	}
 }

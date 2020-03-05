@@ -61,7 +61,12 @@
     <ClCompile Include="ServantProxy.cc">
       <Filter>servant</Filter>
     </ClCompile>
-    <ClCompile Include="client_async_test.cc" />
+    <ClCompile Include="TarsNodeF.cc">
+      <Filter>servant</Filter>
+    </ClCompile>
+    <ClCompile Include="Application.cc">
+      <Filter>servant</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="NetworkUtil.h">
@@ -101,12 +106,6 @@
       <Filter>util</Filter>
     </ClInclude>
     <ClInclude Include="ServantHandle.h">
-      <Filter>servant</Filter>
-    </ClInclude>
-    <ClInclude Include="tc_fcontext.h">
-      <Filter>servant</Filter>
-    </ClInclude>
-    <ClInclude Include="tc_fcontext_x86_64.h">
       <Filter>servant</Filter>
     </ClInclude>
     <ClInclude Include="CoroutineScheduler.h">
@@ -151,13 +150,31 @@
     <ClInclude Include="Transceiver.h">
       <Filter>servant</Filter>
     </ClInclude>
-    <ClInclude Include="TimeoutQueueNew.hpp">
-      <Filter>servant</Filter>
-    </ClInclude>
     <ClInclude Include="Communicator.h">
       <Filter>servant</Filter>
     </ClInclude>
     <ClInclude Include="ServantProxy.h">
+      <Filter>servant</Filter>
+    </ClInclude>
+    <ClInclude Include="TarsNodeF.h">
+      <Filter>servant</Filter>
+    </ClInclude>
+    <ClInclude Include="NodeF.h">
+      <Filter>servant</Filter>
+    </ClInclude>
+    <ClInclude Include="tc_fcontext_x86_64.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="tc_fcontext.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="TimeoutQueueNew.hpp">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="Application.h">
+      <Filter>servant</Filter>
+    </ClInclude>
+    <ClInclude Include="AdminF.h">
       <Filter>servant</Filter>
     </ClInclude>
   </ItemGroup>
@@ -171,13 +188,14 @@
   </ItemGroup>
   <ItemGroup>
     <Library Include="tc_make_x86_64_sysv_elf_gas.s">
-      <Filter>servant</Filter>
+      <Filter>util</Filter>
     </Library>
     <Library Include="tc_jump_x86_64_sysv_elf_gas.s">
-      <Filter>servant</Filter>
+      <Filter>util</Filter>
     </Library>
   </ItemGroup>
   <ItemGroup>
     <None Include="client_test.cc" />
+    <None Include="client_async_test.cc" />
   </ItemGroup>
 </Project>
