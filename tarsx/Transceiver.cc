@@ -31,6 +31,7 @@ auto Transceiver::close() -> void {
 }
 
 auto Transceiver::connect() -> void {
+	connected_ = true;
 	auto fd = -1;
 	fd = NetworkUtil::createSocket(false);
 	NetworkUtil::set_block(fd, false);
@@ -50,7 +51,7 @@ auto Transceiver::connect() -> void {
 
 	//int qos;
 	//::setsockopt(fd, SOL_IP, IP_TOS, &qos, sizeof(qos));
-	objectProxy()->communicatorEpoll()->add(fd, &fdInfo_, EPOLLIN | EPOLLOUT);
+	objectProxy()->communicatorEpoll()->add(fd, &fdInfo_, EPOLLIN);
 }
 
 auto Transceiver::doRequest() -> int {
@@ -149,7 +150,7 @@ auto Transceiver::doResponse(std::list<std::string>& done) -> int {
 auto Transceiver::send(const void* buf, uint32_t len, uint32_t flag) -> int {
 	auto ret = ::send(fd_, buf, len, flag);
 	if(ret<0 && errno !=EAGAIN) {
-		printf("Transceiver::send fail \n");
+		LOG_SYSFATAL << "Transceiver::send fail";
 		return ret;
 	}
 	if(ret<0 && errno == EAGAIN) {

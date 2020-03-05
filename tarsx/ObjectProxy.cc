@@ -12,7 +12,9 @@ ObjectProxy::ObjectProxy(CommunicatorEpoll* communicatorEpoll, const std::string
 }
 
 auto ObjectProxy::invoke(ReqMessage* msg) -> void {
-	trans_->connect();
+	if(!trans_->connected_) {
+		trans_->connect();
+	}
 	msg->requestId=generateId();
 
 	// 序列化msg中的内容，传递给服务端

@@ -40,7 +40,8 @@ namespace tarsx {
 		auto sendRequest(const char* data, size_t size, bool forceSend = false) -> int;
 		auto readv(const iovec*, int32_t count) -> int;
 
-	protected:
+		bool connected_ = false;
+	private:
 		int fd_ = -1;
 		std::string ip_;
 		uint16_t port_;
