@@ -2,7 +2,6 @@
 #include <assert.h>
 #include <vector>
 #include <cstdint>
-#include <stdlib.h>
 #include <string.h>
 
 namespace tarsx {
@@ -110,7 +109,7 @@ namespace tarsx {
 		}
 
 		auto pop_front(T& t) -> bool {
-			if (end_ == begin_) {
+			if (!this || end_ == begin_) {
 				return false;
 			}
 			memcpy(&t, p_ + end_, sizeof(T));
@@ -124,7 +123,7 @@ namespace tarsx {
 		}
 
 		auto pop_front() -> bool {
-			if (end_ == begin_) {
+			if (!this || end_ == begin_) {
 				return false;
 			}
 			if (end_ == capacitySub_) {
@@ -137,7 +136,7 @@ namespace tarsx {
 		}
 
 		auto get_front(T& t) -> bool {
-			if (end_ == begin_) {
+			if (!this || end_ == begin_) {
 				return false;
 			}
 			memcpy(&t, p_ + end_, sizeof(T));

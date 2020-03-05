@@ -75,21 +75,36 @@
   <ImportGroup Label="PropertySheets" />
   <PropertyGroup Label="UserMacros" />
   <ItemGroup>
+    <ClCompile Include="AsyncProcThread.cc" />
     <ClCompile Include="BindAdapter.cc" />
+    <ClCompile Include="Buffer.cc" />
     <ClCompile Include="ClientSocket.cc" />
+    <ClCompile Include="client_async_test.cc" />
+    <ClCompile Include="Communicator.cc" />
+    <ClCompile Include="CommunicatorEpoll.cc" />
     <ClCompile Include="Condition.cc" />
     <ClCompile Include="Connection.cc" />
     <ClCompile Include="CoroutineScheduler.cc" />
     <ClCompile Include="Epoller.cc" />
     <ClCompile Include="EpollServer.cc" />
+    <ClCompile Include="ServantProxy.cc" />
+    <ClCompile Include="Transceiver.cc" />
+    <ClInclude Include="AsyncProcThread.h" />
+    <ClInclude Include="Buffer.h" />
+    <ClInclude Include="Communicator.h" />
     <ClInclude Include="CommunicatorEpoll.h" />
     <ClInclude Include="EpollServer.h" />
-    <ClCompile Include="main.cc" />
+    <None Include="client_test.cc" />
     <ClCompile Include="Mutex.cc" />
     <ClCompile Include="NetThread.cc" />
     <ClCompile Include="NetworkUtil.cc" />
+    <ClCompile Include="ObjectProxy.cc" />
+    <ClCompile Include="ObjectProxyFactory.cc" />
     <ClCompile Include="ServantHandle.cc" />
     <ClCompile Include="Socket.cc" />
+    <ClInclude Include="ServantProxy.h" />
+    <ClInclude Include="TimeoutQueueNew.hpp" />
+    <ClInclude Include="Transceiver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BindAdapter.h" />
@@ -107,6 +122,8 @@
     <ClInclude Include="NetThread.h" />
     <ClInclude Include="NetworkUtil.h" />
     <ClInclude Include="noncopyable.h" />
+    <ClInclude Include="ObjectProxy.h" />
+    <ClInclude Include="ObjectProxyFactory.h" />
     <ClInclude Include="ServantHandle.h" />
     <ClInclude Include="ServantManager.h" />
     <ClInclude Include="Singleton.h" />

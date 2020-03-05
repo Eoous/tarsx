@@ -1,5 +1,6 @@
 #pragma once
 #include <cstdint>
+#include <functional>
 #include <string>
 #include <memory>
 #include <map>
@@ -7,6 +8,7 @@
 
 #include "Monitor.hpp"
 #include "LoopQueue.hpp"
+#include "Socket.h"
 
 namespace tarsx {
 	class ServantHandle;
@@ -59,7 +61,9 @@ namespace tarsx {
 		int type = ET_C_NOTIFY;
 		void* p = nullptr;
 	};
-
+	struct ReqMessage;
+	using asyncCallback = std::function<int(ReqMessage*)>;
+	
 	struct ReqMonitor :public ThreadLock {
 
 	};
@@ -97,6 +101,7 @@ namespace tarsx {
 
 		ReqStatus status = REQ_REQ;
 		CallType type = SYNC_CALL;
+		asyncCallback callback;
 		//std::shared_ptr<ServantProxyCallback> callback;
 		std::shared_ptr<ObjectProxy> objectProxy;
 		std::string request;
@@ -111,5 +116,12 @@ namespace tarsx {
 	};
 
 	using ReqInfoQueue = LoopQueue<ReqMessage*>;
-	
+
+	struct NotifyInfo {
+		FDInfo fd_info;
+		Socket notify;
+		int eventfd = -1;
+		bool valid = false;
+	};
+
 }

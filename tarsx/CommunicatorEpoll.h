@@ -12,19 +12,12 @@ namespace tarsx {
 	class AsyncProcThread;
 	class ObjectProxyFactory;
 
-	class CommunicatorEpoll : public Thread {
-		struct NotifyInfo {
-			FDInfo fd_info;
-			Socket notify;
-			int eventfd = -1;
-			bool valid = false;
-		};
-
+	class CommunicatorEpoll {
 	public:
 		CommunicatorEpoll(size_t netThreadSeq);
 		CommunicatorEpoll(Communicator* communicator, size_t netThreadSeq);
-		virtual ~CommunicatorEpoll() = default;
-		virtual auto run() -> void override;
+		~CommunicatorEpoll() = default;
+		auto run() -> void ;
 
 		auto get_objectProxy(const std::string& ip, const uint16_t& port)->std::shared_ptr<ObjectProxy>;
 
@@ -37,13 +30,14 @@ namespace tarsx {
 		auto pushAsyncThreadQueue(ReqMessage* msg) -> void;
 
 		auto terminate() -> void;
+		auto start() -> void;
 
-	protected:
-		virtual auto handle(FDInfo* info, uint32_t events) -> void;
-		virtual auto handleInputImp(Transceiver* transceiver) -> void;
-		virtual auto handleOutputImp(Transceiver* transceiver) -> void;
+	private:
+		auto handle(FDInfo* info, uint32_t events) -> void;
+		auto handleInputImp(Transceiver* transceiver) -> void;
+		auto handleOutputImp(Transceiver* transceiver) -> void;
 
-	protected:
+	private:
 		std::array<NotifyInfo, 2048> notify_;
 		Socket shutdown_;
 		Epoller epoller_;
