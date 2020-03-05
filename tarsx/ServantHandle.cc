@@ -8,6 +8,7 @@
 #include "CoroutineScheduler.h"
 #include "BindAdapter.h"
 #include "EpollServer.h"
+#include "ServantManager.h"
 
 using namespace tarsx;
 
@@ -19,14 +20,14 @@ auto ServantHandle::init() -> void {
 	assert(handle_group);
 	
 	for(auto&[name,adapter]:handle_group->adapters) {
-		// 从static中找到servant func 
-		//auto servant =
-		//servants_[name] = servant_func;
+		auto servant_func= ServantHelperManager::instance().get_funcByName(name);
+		servants_[name] = servant_func;
 	}
 	
 }
 
 auto ServantHandle::start() -> void {
+	LOG_INFO << "ServantHandle::start()";
 	std::thread running([this]() {
 		run();
 		});
@@ -36,7 +37,7 @@ auto ServantHandle::start() -> void {
 auto ServantHandle::run() -> void {
 	init();
 
-	LOG_TRACE << "open coroutine";
+	LOG_INFO << "open coroutine";
 	auto coroutineNum = (coroutineMemSize > coroutineStackSize) ? (coroutineMemSize / (coroutineStackSize * 4)) : 1;
 
 	if(coroutineNum < 1) {
@@ -125,12 +126,7 @@ auto ServantHandle::handleRequest() -> void {
 
 auto ServantHandle::handle(utagRecvData& recv_data) -> void {
 	/* first->name second->dispatchFunc */
-	servants_["test"] = [](const std::string& request, std::vector<char>& buffer) {
-		std::string a = " response ";
-		buffer.assign(a.begin(),a.end());
-		return -1;
-	};
-	auto func = servants_.find("test");
+	auto func = servants_.find(recv_data->adapter->get_name());
 	assert(func != servants_.end());
 	std::vector<char> buffer;
 

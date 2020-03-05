@@ -106,8 +106,9 @@
     <ClInclude Include="Mutex.h" />
     <ClInclude Include="NetThread.h" />
     <ClInclude Include="NetworkUtil.h" />
+    <ClInclude Include="noncopyable.h" />
     <ClInclude Include="ServantHandle.h" />
-    <ClInclude Include="ServantHelper.h" />
+    <ClInclude Include="ServantManager.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="tc_fcontext.h" />
     <ClInclude Include="tc_fcontext_x86_64.h" />

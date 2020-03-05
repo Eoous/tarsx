@@ -106,7 +106,10 @@
     <ClInclude Include="LoopQueue.hpp">
       <Filter>util</Filter>
     </ClInclude>
-    <ClInclude Include="ServantHelper.h">
+    <ClInclude Include="noncopyable.h">
+      <Filter>util</Filter>
+    </ClInclude>
+    <ClInclude Include="ServantManager.h">
       <Filter>servant</Filter>
     </ClInclude>
   </ItemGroup>

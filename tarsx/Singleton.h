@@ -3,6 +3,8 @@
 #include <pthread.h>
 #include <stdlib.h> // atexit
 
+#include "noncopyable.h"
+
 namespace tarsx {
 	namespace detail{
 		// This doesn't detect inherited member functions!
@@ -18,8 +20,8 @@ namespace tarsx {
 	template<typename T>
 	class Singleton : noncopyable{
 	public:
-		Singleton() = delete;
-		~Singleton() = delete;
+		Singleton() = default;
+		~Singleton() = default;
 
 		static T& instance(){
 			pthread_once(&ponce_, &Singleton::init);

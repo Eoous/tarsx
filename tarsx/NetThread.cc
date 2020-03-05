@@ -211,6 +211,7 @@ auto NetThread::delConnection(std::shared_ptr<Connection> connection, bool erase
 }
 
 auto NetThread::start() -> void {
+	LOG_INFO << "NetThread::start()";
 	std::thread epoll_loop(&NetThread::run,this);
 	epoll_loop.detach();
 }
