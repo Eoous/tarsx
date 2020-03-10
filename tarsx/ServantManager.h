@@ -15,7 +15,7 @@ namespace tarsx {
 			printf("asd");
 		}
 		auto addServant(const std::string& name, dispatcFunc func,bool check = false) -> void {
-			if (check && servantAdapter_.find(name) == servantAdapter_.end()) {
+			if (check && servantAdapter_.find(name) != servantAdapter_.end()) {
 				throw std::runtime_error("[TARSX]ServantHelperManager::addServant " + name + " not find adapter.(maybe not conf in the web) \n");
 			}
 			servantMap_[name] = func;

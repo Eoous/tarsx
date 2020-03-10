@@ -44,7 +44,12 @@ auto AsyncProcThread::run() -> void {
 		}
 
 		if (msgQueue_->pop_front(msg)) {
-			msg->callback(msg);
+			if(msg->callback) {
+				msg->callback(msg);
+			}
+			else {
+				printf("%s \n", msg->response.data());
+			}
 			delete msg;
 		}
 	}

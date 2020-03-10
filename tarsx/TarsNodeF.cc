@@ -7,12 +7,12 @@
 
 using namespace tarsx;
 
-auto TarsNodeFHelper::set_nodeInfo(const std::shared_ptr<Communicator>& comm, const std::string& obj, const std::string& app, const std::string& server) -> void {
+auto TarsNodeFHelper::set_nodeInfo(const std::shared_ptr<Communicator>& comm, const std::string& node, const std::string& app, const std::string& server) -> void {
 	communicator_ = comm;
-	if (!obj.empty()) {
-		auto pos = obj.find(":");
-		auto host = obj.substr(0, pos);
-		auto portstr = obj.substr(pos + 1);
+	if (!node.empty()) {
+		auto pos = node.find(":");
+		auto host = node.substr(0, pos);
+		auto portstr = node.substr(pos + 1);
 		uint16_t port = atoi(portstr.data());
 		printf("set_nodeInfo host is %s  \n", host.data());
 		nodeProxy_.reset(communicator_->stringToProxy(host, port));

@@ -12,7 +12,7 @@ namespace tarsx {
 	class TarsNodeFHelper : public Singleton<TarsNodeFHelper> {
 	public:
 		auto set_nodeInfo(const std::shared_ptr<Communicator>& comm,
-			const std::string& obj, const std::string& app, const std::string& server) -> void;
+			const std::string& node, const std::string& app, const std::string& server) -> void;
 
 		auto keepAlive(const std::string& adapter = "") -> void;
 	protected:

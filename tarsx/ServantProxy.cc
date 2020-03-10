@@ -28,9 +28,7 @@ auto ServantProxy::tars_invoke(const std::string& func_name, const std::string& 
 auto ServantProxy::tars_invoke_async(const std::string& func_name, const std::string& request,const asyncCallback& cb) -> void {
 	auto msg = new ReqMessage();
 	msg->init(ReqMessage::ASYNC_CALL);
-	if(cb) {
-		msg->callback = cb;
-	}
+	msg->callback = cb;
 	msg->request = func_name + ":" + request;
 	invoke(msg);
 }

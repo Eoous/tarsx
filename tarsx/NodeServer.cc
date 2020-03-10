@@ -6,7 +6,7 @@ using namespace tarsx;
 Application g_app;
 
 auto Application::initialize() -> void {
-	auto serverObj = tarsx::ServerConfig::servantName;
+	auto serverObj = tarsx::ServerConfig::adapterName;
 	addServant(serverObj,ServerImp);
 	//auto serverObj1 = ServerConfig::servantName1;
 	//addServant(serverObj1,NodeImp);

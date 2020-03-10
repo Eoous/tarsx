@@ -5,7 +5,7 @@ using namespace tarsx;
 Application g_app;
 
 auto Application::initialize() -> void {
-	addServant(ServerConfig::servantName,HelloImp);
+	addServant(ServerConfig::adapterName,HelloImp);
 }
 
 int main(int argc, char* argv[]) {
