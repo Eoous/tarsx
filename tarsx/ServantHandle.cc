@@ -131,9 +131,7 @@ auto ServantHandle::handle(utagRecvData& recv_data) -> void {
 	assert(func != servants_.end());
 	std::vector<char> buffer;
 
-	auto funcc = func->second;
-	auto recv_data_d = recv_data->buffer;
-	funcc(recv_data_d, buffer);
+	func->second(recv_data->buffer, buffer);
 	std::string response;
 	response.resize(buffer.size());
 	response.assign(buffer.begin(), buffer.end());
