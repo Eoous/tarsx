@@ -50,7 +50,6 @@ namespace tarsx {
 		std::string ip_;
 		uint16_t port_;
 		bool close_;
-		std::string receiveBuffer_;
 		Buffer recvBuffer_;
 		std::vector<Slice> sendBuffer_;
 	};
