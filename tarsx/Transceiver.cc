@@ -35,6 +35,8 @@ auto Transceiver::connect() -> void {
 	auto fd = -1;
 	fd = NetworkUtil::createSocket(false);
 	NetworkUtil::set_block(fd, false);
+	NetworkUtil::set_tcpNoDealy(fd);
+	NetworkUtil::set_keepAlive(fd);
 
 	sockaddr_in addr;
 	NetworkUtil::getAddress(ip_, port_, addr);

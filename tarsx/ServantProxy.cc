@@ -20,7 +20,7 @@ auto ServantProxy::tars_invoke(const std::string& func_name, const std::string& 
 	msg->init(ReqMessage::SYNC_CALL);
 	msg->request = func_name + ":" + request;
 	invoke(msg);
-	resp = msg->response;
+	resp = std::move(msg->response);
 	delete msg;
 	msg = nullptr;
 }

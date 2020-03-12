@@ -166,7 +166,7 @@ auto CommunicatorEpoll::handle(FDInfo* info, uint32_t events) -> void {
 
 						return;
 					}
-					msg->objectProxy->invoke(msg);
+					msg->objectProxy->sendReqMessage(msg);
 				}
 			}
 			catch (std::exception & e) {

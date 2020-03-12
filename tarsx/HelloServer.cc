@@ -14,8 +14,8 @@ int main(int argc, char* argv[]) {
 	ServerConfig::node = "127.0.0.1:19386";
 	ServerConfig::openCoroutine = true;
 
-	ServerConfig::adapterName = "TestApp.HelloServer.HelloObjAdapter";
-	ServerConfig::servantName = "TestApp.HelloServer.HelloObj";
+	ServerConfig::adapterName = "HelloObjAdapter";
+	ServerConfig::servantName = "HelloObj";
 	ServerConfig::adapterIp = "127.0.0.1";
 	ServerConfig::adapterPort = 9877;
 	g_app.extra_main(argc, argv);

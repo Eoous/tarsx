@@ -9,7 +9,7 @@ namespace tarsx {
 		ObjectProxy(CommunicatorEpoll* communicatorEpoll,const std::string& host,const uint16_t& port);
 		~ObjectProxy() = default;
 
-		auto invoke(ReqMessage* msg) -> void;
+		auto sendReqMessage(ReqMessage* msg) -> void;
 		auto doInvoke() -> void;
 		auto finishInvoke(const std::string& response) -> void;
 		auto finishInvoke(ReqMessage* msg) -> void;

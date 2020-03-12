@@ -43,7 +43,7 @@ namespace tarsx {
 		static auto get_communicator() {
 			return communicator_;
 		}
-	protected:
+	private:
 		auto initializeClient() -> void;
 		auto initializeServer() -> void;
 		auto bindAdapter(std::vector<std::shared_ptr<BindAdapter>>& adapters) -> void;
@@ -54,7 +54,7 @@ namespace tarsx {
 		auto addServant(const std::string& name, dispatcFunc func) {
 			ServantHelperManager::instance().addServant(name, func, true);
 		}
-	protected:
+	private:
 		static std::shared_ptr<EpollServer> epollServer_;
 		static std::shared_ptr<Communicator> communicator_;
 	};

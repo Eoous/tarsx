@@ -101,7 +101,7 @@ auto Application::initializeServer() -> void {
 	ServantHelperManager::instance().set_adapter_servant("AdminAdapter", "AdminObj");
 	auto adapter = std::make_shared<BindAdapter>(epollServer_.get());
 	adapter->set_name("AdminAdapter");
-	adapter->set_endpoint("127.0.0.1", 20002);
+	adapter->set_endpoint("127.0.0.1", 20001);
 	adapter->set_handleGroupName("AdminAdapter");
 	adapter->set_handleNum(1);
 	epollServer_->set_handleGroup(adapter->get_handleGroupName(), adapter->get_handleNum(), adapter);

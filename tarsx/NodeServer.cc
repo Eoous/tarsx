@@ -18,13 +18,13 @@ int main(int argc, char* argv[]) {
 	//ServerConfig::Node         = "127.0.0.1:19386";
 	ServerConfig::openCoroutine = true;
 
-	ServerConfig::adapterName = "tars.tarsnode.ServerAdapter";
-	ServerConfig::servantName = "tars.tarsnode.ServerObj";
-	ServerConfig::adapterIp = "127.0.0.1";
+	ServerConfig::adapterName = "ServerAdapter";
+	ServerConfig::servantName = "ServerObj";
+	ServerConfig::adapterIp = "";
 	ServerConfig::adapterPort = 19386;
 
-	ServerConfig::adapterName1 = "tars.tarsnode.NodeAdapter";
-	ServerConfig::servantName1 = "tars.tarsnode.NodeObj";
+	ServerConfig::adapterName1 = "NodeAdapter";
+	ServerConfig::servantName1 = "NodeObj";
 	ServerConfig::adapterIp1 = "127.0.0.1";
 	ServerConfig::adapterPort1 = 19385;
 

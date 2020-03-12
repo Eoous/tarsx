@@ -37,7 +37,7 @@ auto TarsNodeFHelper::keepAlive(const std::string& adapter) -> void {
 			ServerInfo si = serverInfo_;
 			for (auto& name : s) {
 				si.adapter = name;
-				async_keepAlive2(si, nodeProxy_);
+				keepAlive_async(si, nodeProxy_);
 			}
 		}
 	}

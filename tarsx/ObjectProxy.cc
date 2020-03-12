@@ -11,15 +11,22 @@ ObjectProxy::ObjectProxy(CommunicatorEpoll* communicatorEpoll, const std::string
 	 trans_(new Transceiver(this,host,port)){
 }
 
-auto ObjectProxy::invoke(ReqMessage* msg) -> void {
+auto ObjectProxy::sendReqMessage(ReqMessage* msg) -> void {
 	if(!trans_->connected_) {
 		trans_->connect();
 	}
 	msg->requestId=generateId();
 
 	// 序列化msg中的内容，传递给服务端
-	msg->reqData = std::to_string(msg->requestId) + ":" + msg->request;
-
+	auto temp = std::to_string(msg->requestId) + ":" + msg->request;
+	msg->reqData.resize(4);
+	int32_t len = static_cast<int32_t>(temp.size());
+	int32_t be32 = ::htonl(len);
+	auto prepend = const_cast<char*>(msg->reqData.data());
+	*reinterpret_cast<int32_t*>(prepend) = be32;
+	msg->reqData.push_back(':');
+	msg->reqData.append(std::move(temp));
+	
 	if(timeoutQueue_->sendListEmpty() && trans_->sendRequest(msg->reqData.data(),msg->reqData.size())!=Transceiver::retError) {
 		auto flag = timeoutQueue_->push(msg, msg->requestId, 1000 + msg->beginTime);
 		if(!flag) {
@@ -54,9 +61,7 @@ auto ObjectProxy::doInvoke() -> void {
 		else if(ret == Transceiver::retFull) {
 			return;
 		}
-		
 	}
-	
 }
 
 auto ObjectProxy::finishInvoke(const std::string& response) -> void {

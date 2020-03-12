@@ -67,7 +67,7 @@
     <ClCompile Include="Application.cc">
       <Filter>servant</Filter>
     </ClCompile>
-    <ClCompile Include="HelloServer.cc">
+    <ClCompile Include="NodeServer.cc">
       <Filter>example</Filter>
     </ClCompile>
   </ItemGroup>
@@ -200,6 +200,9 @@
     <Filter Include="example">
       <UniqueIdentifier>{562f2d52-7962-4f06-9783-6ea09004273e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="framework">
+      <UniqueIdentifier>{5ea21722-9550-4c43-851b-96c7336e0eec}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Library Include="tc_make_x86_64_sysv_elf_gas.s">
@@ -216,8 +219,8 @@
     <None Include="client_async_test.cc">
       <Filter>example</Filter>
     </None>
-    <None Include="NodeServer.cc">
-      <Filter>servant</Filter>
+    <None Include="HelloServer.cc">
+      <Filter>example</Filter>
     </None>
   </ItemGroup>
 </Project>

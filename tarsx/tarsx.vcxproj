@@ -88,8 +88,8 @@
     <ClCompile Include="CoroutineScheduler.cc" />
     <ClCompile Include="Epoller.cc" />
     <ClCompile Include="EpollServer.cc" />
-    <ClCompile Include="HelloServer.cc" />
-    <None Include="NodeServer.cc" />
+    <None Include="HelloServer.cc" />
+    <ClCompile Include="NodeServer.cc" />
     <ClCompile Include="ServantProxy.cc" />
     <ClCompile Include="TarsNodeF.cc" />
     <ClCompile Include="Transceiver.cc" />

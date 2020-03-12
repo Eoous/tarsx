@@ -2,6 +2,7 @@
 #include <memory>
 #include <vector>
 
+#include "Buffer.h"
 #include "Socket.h"
 #include "BufferPoll.h"
 #include "Message.h"
@@ -50,6 +51,7 @@ namespace tarsx {
 		uint16_t port_;
 		bool close_;
 		std::string receiveBuffer_;
+		Buffer recvBuffer_;
 		std::vector<Slice> sendBuffer_;
 	};
 

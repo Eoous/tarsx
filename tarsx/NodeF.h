@@ -29,7 +29,7 @@ namespace tarsx {
 		servant_proxy->tars_invoke_async("keepAlive", request);
 	};
 
-	inline auto async_keepAlive2 = [](auto&& server_info, auto&& servant_proxy) {
+	inline auto keepAlive_async = [](auto&& server_info, auto&& servant_proxy) {
 		auto req = server_info.application + ":" + server_info.serverName + ":" + std::to_string(server_info.pid) + ":" + server_info.adapter;
 		servant_proxy->tars_invoke_async("keepAlive", req);
 	};

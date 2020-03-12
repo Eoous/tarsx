@@ -36,6 +36,10 @@ namespace tarsx {
 			return capacity_;
 		}
 
+		const auto peek() {
+			return buffer_ + readPos_;
+		}
+
 		auto shrink() -> void;
 		auto clear() -> void;
 		auto swap(Buffer& buf) -> void;
@@ -56,4 +60,5 @@ namespace tarsx {
 		char* buffer_ = nullptr;
 		size_t highWaterPercent_ = 50;
 	};
+	inline static constexpr size_t kHeaderSize = 5;
 }

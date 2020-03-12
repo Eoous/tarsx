@@ -13,7 +13,7 @@ Connection::Connection(std::shared_ptr<BindAdapter> bind_adapter, int listenfd, 
 }
 
 auto Connection::recv(std::deque<utagRecvData>& queue) -> int {
-	LOG_TRACE << socket_.fd() << "--recv";
+	LOG_INFO << socket_.fd() << " recv request";
 	queue.clear();
 
 	while(true) {
@@ -34,20 +34,33 @@ auto Connection::recv(std::deque<utagRecvData>& queue) -> int {
 			// client closed
 			return -1;
 		}
-		receiveBuffer_.append(buffer, bytes_received);
+		recvBuffer_.pushData(buffer, bytes_received);
 		if(static_cast<size_t>(bytes_received) < sizeof(buffer)) {
 			break;
 		}
 	}
 
 	if(listenfd_ != -1) {
-		if(!receiveBuffer_.empty()) {
-			std::unique_ptr<tagRecvData> recv(
-				new tagRecvData{
-				uid_,std::move(receiveBuffer_),
+		// 4 is message length
+		while(recvBuffer_.readableSize() >= kHeaderSize-1) {
+			const void* data = recvBuffer_.peek();
+			int32_t be32 = *static_cast<const int32_t*>(data);
+			const int32_t len = ::ntohl(be32);
+			if(recvBuffer_.readableSize() >= len + kHeaderSize) {
+				std::string temp(recvBuffer_.peek());
+				recvBuffer_.consume(kHeaderSize);
+				std::string req(recvBuffer_.peek(), len);
+				std::unique_ptr<tagRecvData> recv(new tagRecvData{
+					uid_,std::move(req),
 					ip_,port_,0,false,false,
-					fd(),bindAdapter_ });
-			queue.push_back(std::move(recv));
+					fd(),bindAdapter_
+				});
+				recvBuffer_.consume(len);
+				queue.push_back(std::move(recv));
+			}
+			else {
+				break;
+			}
 		}
 	}
 	return queue.size();
