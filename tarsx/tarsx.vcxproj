@@ -88,8 +88,10 @@
     <ClCompile Include="CoroutineScheduler.cc" />
     <ClCompile Include="Epoller.cc" />
     <ClCompile Include="EpollServer.cc" />
-    <None Include="HelloServer.cc" />
-    <ClCompile Include="NodeServer.cc" />
+    <ClCompile Include="HelloServer.cc" />
+    <None Include="NodeServer.cc" />
+    <ClCompile Include="Registry.cc" />
+    <None Include="RegistryServer.cc" />
     <ClCompile Include="ServantProxy.cc" />
     <ClCompile Include="TarsNodeF.cc" />
     <ClCompile Include="Transceiver.cc" />
@@ -111,6 +113,8 @@
     <ClInclude Include="HelloImp.hpp" />
     <ClInclude Include="NodeImp.hpp" />
     <ClInclude Include="NodeF.h" />
+    <ClInclude Include="Registry.h" />
+    <ClInclude Include="RegistryImp.hpp" />
     <ClInclude Include="ServantProxy.h" />
     <ClInclude Include="ServerImp.hpp" />
     <ClInclude Include="TarsNodeF.h" />

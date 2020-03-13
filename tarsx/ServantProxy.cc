@@ -34,7 +34,9 @@ auto ServantProxy::tars_invoke_async(const std::string& func_name, const std::st
 }
 
 auto ServantProxy::invoke(ReqMessage* msg, bool coroAsync) -> void {
-	auto sptd = ServantProxyThreadData::get_data();
+	if(sptd == nullptr) {
+		sptd = ServantProxyThreadData::get_data();
+	}
 
 	std::shared_ptr<ObjectProxy> objectproxy = nullptr;
 	ReqInfoQueue* reqInfoQueue = nullptr;
@@ -57,10 +59,10 @@ auto ServantProxy::invoke(ReqMessage* msg, bool coroAsync) -> void {
 		delete msg;
 		msg = nullptr;
 
-		objectproxy->communicatorEpoll()->notify(sptd->reqQNo_, *reqInfoQueue);
+		objectproxy->communicatorEpoll()->notify(sptd->netSeq_, *reqInfoQueue);
 		printf("client queue full \n");
 	}
-	objectproxy->communicatorEpoll()->notify(0, *reqInfoQueue);
+	objectproxy->communicatorEpoll()->notify(sptd->netSeq_, *reqInfoQueue);
 	if (sync) {
 		if (!msg->monitorFin) {
 			Lock lock(*(msg->monitor));

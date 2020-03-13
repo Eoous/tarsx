@@ -51,7 +51,7 @@ namespace tarsx {
 		Socket shutdownSock_;
 		Socket notifySocket_;
 		Socket listenSocket_;
-
+		
 		std::map<int, std::shared_ptr<Connection>> connectionUids_;
 		std::list<uint32_t> free_;
 		volatile size_t freeSize_;

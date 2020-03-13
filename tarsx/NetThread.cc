@@ -189,7 +189,6 @@ auto NetThread::addTConnection(std::shared_ptr<Connection> connection) -> void {
 }
 
 auto NetThread::delConnection(std::shared_ptr<Connection> connection, bool eraseList, EM_CLOSE_T closeType) -> void {
-	LOG_TRACE << "delConnection():" << connection->fd();
 	if (connection->get_listenfd() != -1) {
 		uint32_t uid = connection->get_uid();
 

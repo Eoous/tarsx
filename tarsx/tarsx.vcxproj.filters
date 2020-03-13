@@ -67,7 +67,10 @@
     <ClCompile Include="Application.cc">
       <Filter>servant</Filter>
     </ClCompile>
-    <ClCompile Include="NodeServer.cc">
+    <ClCompile Include="Registry.cc">
+      <Filter>framework\Registry</Filter>
+    </ClCompile>
+    <ClCompile Include="HelloServer.cc">
       <Filter>example</Filter>
     </ClCompile>
   </ItemGroup>
@@ -189,6 +192,12 @@
     <ClInclude Include="NodeImp.hpp">
       <Filter>servant</Filter>
     </ClInclude>
+    <ClInclude Include="Registry.h">
+      <Filter>framework\Registry</Filter>
+    </ClInclude>
+    <ClInclude Include="RegistryImp.hpp">
+      <Filter>framework\Registry</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="util">
@@ -202,6 +211,9 @@
     </Filter>
     <Filter Include="framework">
       <UniqueIdentifier>{5ea21722-9550-4c43-851b-96c7336e0eec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="framework\Registry">
+      <UniqueIdentifier>{dff78b61-8d5b-4b36-a410-faace2cb433a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -219,8 +231,11 @@
     <None Include="client_async_test.cc">
       <Filter>example</Filter>
     </None>
-    <None Include="HelloServer.cc">
+    <None Include="NodeServer.cc">
       <Filter>example</Filter>
+    </None>
+    <None Include="RegistryServer.cc">
+      <Filter>framework\Registry</Filter>
     </None>
   </ItemGroup>
 </Project>

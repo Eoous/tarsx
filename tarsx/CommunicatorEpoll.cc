@@ -18,11 +18,10 @@ CommunicatorEpoll::CommunicatorEpoll(size_t netThreadSeq)
 
 	epoller_.create(1024);
 	shutdown_.createSocket();
+	toserver_.createSocket();
 	epoller_.add(shutdown_.fd(), 0, EPOLLIN);
-
-	if (asyncThreadNum_ == 0) {
-		asyncThreadNum_ = 3;
-	}
+	epoller_.add(toserver_.fd(), 0, EPOLLIN);
+	
 	asyncThreadNum_ = 1;
 	for (size_t i = 0; i < asyncThreadNum_; ++i) {
 		asyncThread_.emplace_back(std::make_unique<AsyncProcThread>(100));
@@ -116,6 +115,7 @@ auto CommunicatorEpoll::del(int fd, FDInfo* info, uint32_t events) -> void {
 // handle的时候直接取出来就行了
 auto CommunicatorEpoll::notify(size_t seq, ReqInfoQueue& reqQueue) -> void {
 	if (notify_[seq].valid) {
+		notify_[seq].fd_info.p = (void*)&reqQueue;
 		epoller_.mod(notify_[seq].notify.fd(), (long long)&notify_[seq].fd_info, EPOLLIN);
 		assert(notify_[seq].fd_info.p == (void*)&reqQueue);
 	}
@@ -148,29 +148,24 @@ auto CommunicatorEpoll::handle(FDInfo* info, uint32_t events) -> void {
 			auto infoQueue = reinterpret_cast<ReqInfoQueue*>(info->p);
 			ReqMessage* msg = nullptr;
 
-			try {
-				while (infoQueue->pop_front(msg)) {
-					if (ReqMessage::THREAD_EXIT == msg->type) {
-						assert(infoQueue->empty());
+			while (infoQueue->pop_front(msg)) {
+				if (ReqMessage::THREAD_EXIT == msg->type) {
+					assert(infoQueue->empty());
 
-						delete msg;
-						msg = nullptr;
+					delete msg;
+					msg = nullptr;
 
-						epoller_.del(notify_[info->seq].notify.fd(), (long long) & (notify_[info->seq].fd_info), EPOLLIN);
-						delete infoQueue;
-						infoQueue = nullptr;
+					epoller_.del(notify_[info->seq].notify.fd(), (long long) & (notify_[info->seq].fd_info), EPOLLIN);
+					delete infoQueue;
+					infoQueue = nullptr;
 
-						notify_[info->seq].fd_info.p = nullptr;
-						notify_[info->seq].notify.close();
-						notify_[info->seq].valid = false;
+					notify_[info->seq].fd_info.p = nullptr;
+					notify_[info->seq].notify.close();
+					notify_[info->seq].valid = false;
 
-						return;
-					}
-					msg->objectProxy->sendReqMessage(msg);
+					return;
 				}
-			}
-			catch (std::exception & e) {
-
+				msg->objectProxy->sendReqMessage(msg);
 			}
 		}
 		else {
@@ -206,6 +201,10 @@ auto CommunicatorEpoll::handleInputImp(Transceiver* transceiver) -> void {
 
 auto CommunicatorEpoll::handleOutputImp(Transceiver* transceiver) -> void {
 	transceiver->doRequest();
+}
+
+auto CommunicatorEpoll::registe2Center() -> void {
+	
 }
 
 auto CommunicatorEpoll::pushAsyncThreadQueue(ReqMessage* msg) -> void {

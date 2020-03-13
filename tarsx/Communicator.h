@@ -2,6 +2,7 @@
 #include <array>
 #include <cassert>
 #include <string>
+#include <vector>
 
 namespace tarsx {
 	class ServantProxy;
@@ -22,7 +23,6 @@ namespace tarsx {
 
 		auto terminate() -> void;
 		auto get_servantProxy(const std::string& ip, const uint16_t& port)->ServantProxy*;
-
 	private:
 		auto initialize() -> void;
 		auto isTerminating() -> bool;
@@ -31,5 +31,6 @@ namespace tarsx {
 		size_t clientThreadNum_ = 1;
 		bool initialized_ = false;
 		bool terminating_ = false;
+		bool registed_ = false;
 	};
 }

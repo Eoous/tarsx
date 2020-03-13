@@ -37,10 +37,12 @@ namespace tarsx {
 		auto handleInputImp(Transceiver* transceiver) -> void;
 		auto handleOutputImp(Transceiver* transceiver) -> void;
 
+		auto registe2Center() -> void;
 	private:
 		std::array<NotifyInfo, 2048> notify_;
 		Socket shutdown_;
 		Epoller epoller_;
+		Socket toserver_;
 
 		size_t asyncThreadNum_ = 3;
 		std::vector<std::unique_ptr<AsyncProcThread>> asyncThread_;

@@ -41,6 +41,7 @@ namespace tarsx {
 		auto selectNetThreadInfo(ServantProxyThreadData* sptd, std::shared_ptr<ObjectProxy>& objectProxy, ReqInfoQueue*& reqQueue) -> void;
 	private:
 		Communicator* communicator_;
+		ServantProxyThreadData* sptd = nullptr;
 		std::vector<std::shared_ptr<ObjectProxy>> objectProxy_;
 		size_t objectProxyNum_;
 		int queueSize_ = 1000;

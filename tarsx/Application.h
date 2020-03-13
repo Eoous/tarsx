@@ -43,6 +43,7 @@ namespace tarsx {
 		static auto get_communicator() {
 			return communicator_;
 		}
+
 	private:
 		auto initializeClient() -> void;
 		auto initializeServer() -> void;
